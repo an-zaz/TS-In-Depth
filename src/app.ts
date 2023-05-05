@@ -20,8 +20,8 @@ function showHello(divName: string, name: string) {
     const elt = document.getElementById(divName);
     elt.innerText = `Hello from ${name}`;
 }
-function getAllBooks(): Book[] {
-    const books: Book[] = [
+function getAllBooks(): readonly Book[] {
+    const books = <const>[
         { id: 1, title: 'Refactoring JavaScript', category: Category.JavaScript, author: 'Evan Burchard', available: true},
         { id: 2, title: 'JavaScript Testing', category: Category.JavaScript, author: 'Liang Yuxian Eugene', available: false },
         { id: 3, title: 'CSS Secrets', category: Category.CSS, author: 'Lea Verou', available: true },
@@ -52,7 +52,7 @@ function getAllBooks(): Book[] {
 //     const title: string = books.find((book) => book.available).title;
 // }
 
-function logFirstAvailable(books: Book[]): void {
+function logFirstAvailable( books: readonly Book[]): void {
     console.log(`Num of books: ${books.length}`);
 
     const title: string | undefined = books.find(({available}) => available)?.title;
@@ -85,7 +85,7 @@ function calcTotalPages(): void {
         { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
         { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
         { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 }
-    ];
+    ] as const;
 
     // bigint is not assignable to type number
     const numOfPages = data.reduce((acc: bigint, obj) => {
@@ -93,8 +93,9 @@ function calcTotalPages(): void {
     }, 0n);
 }
 
-// Task 02.01
+// Task 02.01, 02.02
 logFirstAvailable(getAllBooks());
 logBookTitles(getBookTitlesByCategory(Category.JavaScript));
 console.log(getBookAuthorByIndex(0));
 console.log(getBookAuthorByIndex(10));
+
