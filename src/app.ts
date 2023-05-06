@@ -1,3 +1,5 @@
+/* eslint-disable no-redeclare */
+
 showHello('greeting', 'TypeScript');
 
 enum Category {
@@ -125,6 +127,29 @@ function сheckoutBooks(customer: string, ...bookIds: number[]): string[]{
         .map(({title}) => title);
 }
 
+function getTitles(author: string): string[];
+function getTitles(available: boolean): string[];
+function getTitles(id: number, available: boolean): string[];
+function getTitles(...args: [string | boolean] | [number, boolean] ): string[] {
+    const books = getAllBooks();
+
+    if (args.length === 1) {
+        const [arg] = args;
+
+        if (typeof arg === 'string') {
+            return books.filter(book => book.author === arg).map(book => book.title);
+        } else if (typeof arg === 'boolean') {
+            return books.filter(book => book.available === arg).map(book => book.title);
+        }
+    } else if (args.length === 2) {
+        const [id, available] = args;
+
+        if (typeof id === 'number' && typeof available === 'boolean') {
+            return books.filter(book => book.available === available && book.id === id).map(book => book.title);
+        }
+    }
+}
+
 // Task 02.01, 02.02
 logFirstAvailable(getAllBooks());
 logBookTitles(getBookTitlesByCategory(Category.JavaScript));
@@ -164,3 +189,8 @@ console.log(getBookByID(10));
 
 const myBooks = сheckoutBooks('Ann',1,2,3,4);
 console.log(myBooks);
+
+// Task 03.03
+console.log(getTitles('Ann'));
+console.log(getTitles(false)); // same as variable checkedOutBooks for task 3 0f 03.03
+console.log(getTitles(1, true));
