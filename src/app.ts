@@ -1,5 +1,7 @@
 /* eslint-disable no-redeclare */
 
+import * as assert from "assert";
+
 showHello('greeting', 'TypeScript');
 
 enum Category {
@@ -150,6 +152,18 @@ function getTitles(...args: [string | boolean] | [number, boolean] ): string[] {
     }
 }
 
+function assertStringValue(value: any): asserts value is string {
+    if (typeof value !== 'string') {
+        throw new Error('value should have been a string');
+    }
+}
+
+function bookTitleTransform(title: any) {
+    assertStringValue(title);
+
+    return [...title].reverse().join('');
+}
+
 // Task 02.01, 02.02
 logFirstAvailable(getAllBooks());
 logBookTitles(getBookTitlesByCategory(Category.JavaScript));
@@ -194,3 +208,7 @@ console.log(myBooks);
 console.log(getTitles('Ann'));
 console.log(getTitles(false)); // same as variable checkedOutBooks for task 3 0f 03.03
 console.log(getTitles(1, true));
+
+// Task 03.04
+console.log(bookTitleTransform('aaa'));
+console.log(bookTitleTransform(4));
