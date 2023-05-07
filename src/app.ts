@@ -25,8 +25,13 @@ interface Book {
     available: boolean;
     category: Category;
     pages?: number;
-    markDamaged?: (reason: string) => void;
+    // markDamaged?: (reason: string) => void;
     // markDamaged?(reason: string): void;
+    markDamaged?: DamageLogger;
+}
+
+interface DamageLogger {
+    (reason: string): void;
 }
 
 function showHello(divName: string, name: string) {
@@ -227,7 +232,6 @@ console.log(bookTitleTransform('aaa'));
 console.log(bookTitleTransform(4));
 
 // Task 04.01
-
 const myBook: Book = {
     id: 5,
     title: 'Colors, Backgrounds, and Gradients',
@@ -247,3 +251,9 @@ const myBook: Book = {
 // if myBook has excess props - no mistake
 printBook(myBook);
 myBook.markDamaged('missing back cover');
+
+// Task 04.02
+const logDamage: DamageLogger = (reason) => {
+    console.log(`Damaged: ${reason}`);
+};
+logDamage('missing back cover');
