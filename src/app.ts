@@ -1,7 +1,5 @@
 /* eslint-disable no-redeclare */
 
-import * as assert from "assert";
-
 showHello('greeting', 'TypeScript');
 
 enum Category {
@@ -12,13 +10,24 @@ enum Category {
     Angular
 }
 
-type Book = {
+// type Book = {
+//     id: number;
+//     title: string;
+//     author: string;
+//     available: boolean;
+//     category: Category;
+// };
+
+interface Book {
     id: number;
     title: string;
     author: string;
     available: boolean;
     category: Category;
-};
+    pages?: number;
+    markDamaged?: (reason: string) => void;
+    // markDamaged?(reason: string): void;
+}
 
 function showHello(divName: string, name: string) {
     const elt = document.getElementById(divName);
@@ -114,7 +123,7 @@ function createCustomer(name: string, age?: number, city: string = 'Kiev') {
     }
 }
 
-function getBookByID(id: number): Book {
+function getBookByID(id: Book['id']): Book | undefined{
     const books = getAllBooks();
 
     return books.find(book => book.id === id);
@@ -162,6 +171,10 @@ function bookTitleTransform(title: any) {
     assertStringValue(title);
 
     return [...title].reverse().join('');
+}
+
+function printBook(book: Book): void {
+    console.log(`${book.title} by ${book.author}`);
 }
 
 // Task 02.01, 02.02
@@ -212,3 +225,25 @@ console.log(getTitles(1, true));
 // Task 03.04
 console.log(bookTitleTransform('aaa'));
 console.log(bookTitleTransform(4));
+
+// Task 04.01
+
+const myBook: Book = {
+    id: 5,
+    title: 'Colors, Backgrounds, and Gradients',
+    author: 'Eric A. Meyer',
+    available: true,
+    category: Category.CSS,
+    // when we explicitly add interface to object literal it must have the same props. (no less, no more)
+    // year: 2015,
+    // copies: 3
+    pages: 200,
+    markDamaged(reason){
+        console.log(`Damaged: ${reason}`);
+    }
+};
+
+// if myBook didn't have value described in Book interface - mistake
+// if myBook has excess props - no mistake
+printBook(myBook);
+myBook.markDamaged('missing back cover');
