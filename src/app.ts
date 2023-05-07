@@ -18,6 +18,8 @@ enum Category {
 //     category: Category;
 // };
 
+type BookProperties = keyof Book;
+
 interface Book {
     id: number;
     title: string;
@@ -196,6 +198,12 @@ function printBook(book: Book): void {
     console.log(`${book.title} by ${book.author}`);
 }
 
+function getProperty(book: Book, prop: BookProperties): any {
+    const value = book[prop];
+
+    return typeof value === 'function' ? value.name : value;
+}
+
 // Task 02.01, 02.02
 logFirstAvailable(getAllBooks());
 logBookTitles(getBookTitlesByCategory(Category.JavaScript));
@@ -298,3 +306,8 @@ console.log(offer.magazine?.getTitle()); // undefined, without ? mistake
 console.log( offer.book.getTitle?.() ); // undefined, without ? mistake
 console.log(offer.book.authors?.[0]); // undefined, without ? mistake
 console.log(offer.book.authors?.[0]?.name); // undefined, without ? mistake
+
+// Task 04.05
+console.log(getProperty(myBook, 'title'));
+console.log(getProperty(myBook, 'markDamaged'));
+// console.log(getProperty(myBook, 'isbn)');
