@@ -285,3 +285,16 @@ const favoriteLibrarian: Librarian = {
     department: 'dep#3',
     assistCustomer (custName: string, bookTitle: string){}
 };
+
+// Task 04.04
+const offer: any = {
+    book: {
+        title: 'Essential TypeScript',
+    },
+};
+
+console.log(offer.magazine); // undefined
+console.log(offer.magazine?.getTitle()); // undefined, without ? mistake
+console.log( offer.book.getTitle?.() ); // undefined, without ? mistake
+console.log(offer.book.authors?.[0]); // undefined, without ? mistake
+console.log(offer.book.authors?.[0]?.name); // undefined, without ? mistake
