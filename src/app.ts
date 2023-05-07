@@ -34,6 +34,20 @@ interface DamageLogger {
     (reason: string): void;
 }
 
+interface Person {
+    name: string;
+    email: string;
+}
+
+interface Author  extends Person{
+    numBooksPublished: number;
+}
+
+interface Librarian extends Person{
+    department: string;
+    assistCustomer: (custName: string, bookTitle: string) => void;
+}
+
 function showHello(divName: string, name: string) {
     const elt = document.getElementById(divName);
     elt.innerText = `Hello from ${name}`;
@@ -257,3 +271,17 @@ const logDamage: DamageLogger = (reason) => {
     console.log(`Damaged: ${reason}`);
 };
 logDamage('missing back cover');
+
+// Task 04.03
+const favoriteAuthor: Author = {
+    name: 'Anna',
+    email: 'a@mail.com',
+    numBooksPublished: 3,
+};
+
+const favoriteLibrarian: Librarian = {
+    name: 'Anna',
+    email: 'a@mail.com',
+    department: 'dep#3',
+    assistCustomer (custName: string, bookTitle: string){}
+};
