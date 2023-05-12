@@ -41,11 +41,11 @@ interface Person {
     email: string;
 }
 
-interface Author  extends Person{
+interface Author  extends Person {
     numBooksPublished: number;
 }
 
-interface Librarian extends Person{
+interface Librarian extends Person {
     department: string;
     assistCustomer: (custName: string, bookTitle: string) => void;
 }
@@ -264,6 +264,15 @@ class Encyclopedia extends ReferenceItem {
     }
 }
 
+class UniversityLibrarian implements Librarian {
+    department: string;
+    email: string;
+    name: string;
+    assistCustomer(custName: string, bookTitle: string): void {
+        console.log(`${this.name} is assisting ${custName} with the book ${bookTitle}`);
+    }
+}
+
 // Task 02.01, 02.02
 logFirstAvailable(getAllBooks());
 logBookTitles(getBookTitlesByCategory(Category.JavaScript));
@@ -347,12 +356,12 @@ const favoriteAuthor: Author = {
     numBooksPublished: 3,
 };
 
-const favoriteLibrarian: Librarian = {
-    name: 'Anna',
-    email: 'a@mail.com',
-    department: 'dep#3',
-    assistCustomer (custName: string, bookTitle: string){}
-};
+// const favoriteLibrarian: Librarian = {
+//     name: 'Anna',
+//     email: 'a@mail.com',
+//     department: 'dep#3',
+//     assistCustomer (custName: string, bookTitle: string){}
+// };
 
 // Task 04.04
 const offer: any = {
@@ -387,3 +396,8 @@ refBook.printItem();
 
 // Task 05.03
 refBook.printCitation();
+
+// Task 05.04
+const favoriteLibrarian: Librarian  = new UniversityLibrarian();
+favoriteLibrarian.name = 'Anna';
+favoriteLibrarian.assistCustomer('Boris','Learn TS');
