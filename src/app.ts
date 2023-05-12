@@ -1,4 +1,4 @@
-/* eslint-disable no-redeclare */
+/* eslint-disable no-redeclare,no-underscore-dangle */
 
 showHello('greeting', 'TypeScript');
 
@@ -204,6 +204,47 @@ function getProperty(book: Book, prop: BookProperties): any {
     return typeof value === 'function' ? value.name : value;
 }
 
+class ReferenceItem {
+    // title: string;
+    // year: number;
+    //
+    // constructor(newTitle: string, newYear: number) {
+    //     console.log('Creating a new ReferenceItem...');
+    //     this.title = newTitle;
+    //     this.year = newYear;
+    // }
+
+    #id: number;
+    private _publisher: string;
+    static department: string = 'Department A';
+
+    // same as
+     constructor(public title: string, private year: number, id: number) {
+        console.log('Creating a new ReferenceItem...');
+        this.#id = id;
+    }
+
+    printItem(): void{
+        console.log(`${this.title} was published in ${this.year}`);
+        console.log(ReferenceItem.department);
+        // same as
+        // console.log(Object.getPrototypeOf(this).constructor.department);
+    }
+
+    get publisher(): string{
+        return this._publisher.toUpperCase();
+    }
+
+    set publisher(newPublisher: string) {
+        this._publisher = newPublisher;
+    }
+
+    // we use public method to return private value
+    getID(): number {
+         return this.getID();
+    }
+}
+
 // Task 02.01, 02.02
 logFirstAvailable(getAllBooks());
 logBookTitles(getBookTitlesByCategory(Category.JavaScript));
@@ -311,3 +352,11 @@ console.log(offer.book.authors?.[0]?.name); // undefined, without ? mistake
 console.log(getProperty(myBook, 'title'));
 console.log(getProperty(myBook, 'markDamaged'));
 // console.log(getProperty(myBook, 'isbn)');
+
+// Task 05.01
+const ref = new ReferenceItem('Learn TS', 2023, 1);
+console.log(ref);
+ref.printItem();
+ref.publisher = 'abc';
+console.log(ref.publisher); // should be upper-cased
+ref.getID();
