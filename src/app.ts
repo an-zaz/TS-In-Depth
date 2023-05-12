@@ -219,7 +219,7 @@ class ReferenceItem {
     static department: string = 'Department A';
 
     // same as
-     constructor(public title: string, private year: number, id: number) {
+     constructor(public title: string, protected year: number, id: number) {
         console.log('Creating a new ReferenceItem...');
         this.#id = id;
     }
@@ -241,7 +241,20 @@ class ReferenceItem {
 
     // we use public method to return private value
     getID(): number {
-         return this.getID();
+         return this.#id;
+    }
+}
+
+class Encyclopedia extends ReferenceItem {
+    // we don't add access modifiers as they will be in parent class
+    constructor( title: string,  year: number, id: number, public edition: number) {
+        console.log('Creating a new Encyclopedia...');
+        super(title, year, id);
+    }
+
+    override printItem(){
+        super.printItem();
+        console.log(`Edition: ${this.edition} ${this.year}`);
     }
 }
 
@@ -360,3 +373,8 @@ ref.printItem();
 ref.publisher = 'abc';
 console.log(ref.publisher); // should be upper-cased
 ref.getID();
+
+// Task 05.02
+const refBook  = new Encyclopedia('Learn TS', 2023, 1, 2);
+console.log(refBook);
+refBook.printItem();
