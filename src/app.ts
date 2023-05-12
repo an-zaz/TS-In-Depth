@@ -204,7 +204,7 @@ function getProperty(book: Book, prop: BookProperties): any {
     return typeof value === 'function' ? value.name : value;
 }
 
-class ReferenceItem {
+abstract class ReferenceItem {
     // title: string;
     // year: number;
     //
@@ -219,7 +219,7 @@ class ReferenceItem {
     static department: string = 'Department A';
 
     // same as
-     constructor(public title: string, protected year: number, id: number) {
+    constructor(public title: string, protected year: number, id: number) {
         console.log('Creating a new ReferenceItem...');
         this.#id = id;
     }
@@ -241,8 +241,10 @@ class ReferenceItem {
 
     // we use public method to return private value
     getID(): number {
-         return this.#id;
+        return this.#id;
     }
+
+    abstract printCitation(): void;
 }
 
 class Encyclopedia extends ReferenceItem {
@@ -255,6 +257,10 @@ class Encyclopedia extends ReferenceItem {
     override printItem(){
         super.printItem();
         console.log(`Edition: ${this.edition} ${this.year}`);
+    }
+
+    printCitation() {
+        return `${this.title} - ${this.year}`;
     }
 }
 
@@ -367,14 +373,17 @@ console.log(getProperty(myBook, 'markDamaged'));
 // console.log(getProperty(myBook, 'isbn)');
 
 // Task 05.01
-const ref = new ReferenceItem('Learn TS', 2023, 1);
-console.log(ref);
-ref.printItem();
-ref.publisher = 'abc';
-console.log(ref.publisher); // should be upper-cased
-ref.getID();
+// const ref = new ReferenceItem('Learn TS', 2023, 1);
+// console.log(ref);
+// ref.printItem();
+// ref.publisher = 'abc';
+// console.log(ref.publisher); // should be upper-cased
+// ref.getID();
 
 // Task 05.02
 const refBook  = new Encyclopedia('Learn TS', 2023, 1, 2);
 console.log(refBook);
 refBook.printItem();
+
+// Task 05.03
+refBook.printCitation();
