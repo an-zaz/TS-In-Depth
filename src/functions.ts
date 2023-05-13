@@ -2,6 +2,7 @@
 import { Book, TOptions } from './interfaces';
 import { Category } from './enums';
 import { BookOrUndefined, BookProperties } from './types';
+import RefBook from './encyclopedia';
 
 export function getAllBooks(): readonly Book[] {
     const books = <const>[
@@ -143,6 +144,17 @@ export function bookTitleTransform(title: any) {
     return [...title].reverse().join('');
 }
 
+export function assertRefBookInstance(condition: any): asserts condition {
+    if (!condition) {
+        throw new Error('It is not an instance of RefBook');
+    }
+}
+
+export function printRefBook(data: any): void {
+    assertRefBookInstance(data instanceof RefBook);
+
+    data.printItem();
+}
 export function printBook(book: Book): void {
     console.log(`${book.title} by ${book.author}`);
 }

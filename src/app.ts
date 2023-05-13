@@ -10,11 +10,13 @@ import {
     getBookTitlesByCategory, getProperty, getTitles,
     logBookTitles,
     logFirstAvailable, printBook, setDefaultConfig,
-    сheckoutBooks
+    сheckoutBooks,
+    printRefBook
 } from './functions';
 import { Category } from './enums';
 import { Author, Book, Librarian, Logger, TOptions } from './interfaces';
 import { PersonBook } from './types';
+import RefBook from './encyclopedia';
 
 showHello('greeting', 'TypeScript');
 
@@ -23,22 +25,6 @@ function showHello(divName: string, name: string) {
     elt.innerText = `Hello from ${name}`;
 }
 
-class Encyclopedia extends ReferenceItem {
-    // we don't add access modifiers as they will be in parent class
-    constructor( title: string,  year: number, id: number, public edition: number) {
-        console.log('Creating a new Encyclopedia...');
-        super(title, year, id);
-    }
-
-    override printItem(){
-        super.printItem();
-        console.log(`Edition: ${this.edition} ${this.year}`);
-    }
-
-    printCitation() {
-        return `${this.title} - ${this.year}`;
-    }
-}
 // Task 02.01, 02.02
 logFirstAvailable(getAllBooks());
 logBookTitles(getBookTitlesByCategory(Category.JavaScript));
@@ -156,7 +142,7 @@ console.log(getProperty(myBook, 'markDamaged'));
 // ref.getID();
 
 // Task 05.02
-const refBook  = new Encyclopedia('Learn TS', 2023, 1, 2);
+const refBook  = new RefBook('Learn TS', 2023, 1, 2);
 console.log(refBook);
 refBook.printItem();
 
@@ -182,3 +168,9 @@ const personBook: PersonBook = {
 let o: TOptions = {speed: 30};
 o = setDefaultConfig(o);
 console.log(o);
+
+// Task 03.03
+printRefBook(refBook);
+
+const ul = new UniversityLibrarian();
+printRefBook(ul);
