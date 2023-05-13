@@ -1,6 +1,6 @@
 /* eslint-disable no-redeclare,no-underscore-dangle */
 
-import { ReferenceItem, UniversityLibrarian } from './classes';
+import { ReferenceItem, UL, RefBook } from './classes';
 import {
     bookTitleTransform,
     createCustomer,
@@ -16,7 +16,6 @@ import {
 import { Category } from './enums';
 import { Author, Book, Librarian, Logger, TOptions } from './interfaces';
 import { PersonBook } from './types';
-import RefBook from './encyclopedia';
 
 showHello('greeting', 'TypeScript');
 
@@ -150,7 +149,7 @@ refBook.printItem();
 refBook.printCitation();
 
 // Task 05.04
-const favoriteLibrarian: Librarian  = new UniversityLibrarian();
+const favoriteLibrarian: Librarian  = new UL.UniversityLibrarian();
 favoriteLibrarian.name = 'Anna';
 favoriteLibrarian.assistCustomer('Boris','Learn TS');
 
@@ -169,8 +168,8 @@ let o: TOptions = {speed: 30};
 o = setDefaultConfig(o);
 console.log(o);
 
-// Task 03.03
+// Task 06.03
 printRefBook(refBook);
 
-const ul = new UniversityLibrarian();
+const ul = new UL.UniversityLibrarian();
 printRefBook(ul);

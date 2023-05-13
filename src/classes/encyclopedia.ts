@@ -1,4 +1,4 @@
-import {ReferenceItem} from './classes';
+import { ReferenceItem } from './reference-item';
 
 export default class Encyclopedia extends ReferenceItem {
     // we don't add access modifiers as they will be in parent class
