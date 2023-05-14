@@ -40,6 +40,10 @@ interface Magazine {
     publisher: string;
 }
 
+interface ShelfItem {
+    title: string;
+}
+
 export {
     Book,
     Author,
@@ -48,4 +52,5 @@ export {
     Librarian,
     TOptions,
     Magazine,
+    ShelfItem,
 };

@@ -236,3 +236,12 @@ const magazine: Magazine[] = [
 const magazineShelf = new Shelf<Magazine>();
 magazine.forEach(mag => magazineShelf.add(mag));
 console.log(magazineShelf.getFirst().title);
+
+// Task 07.03
+magazineShelf.printTitles();
+
+// const a = new Shelf<number>();
+// const a = new Shelf<{title: 'a'}>();
+// const a = new Shelf<{size: 'a'}>();
+
+console.log(magazineShelf.find('Five Points'));
