@@ -16,6 +16,8 @@ import {
 import { Category } from './enums';
 import { Author, Book, Librarian, Logger, TOptions } from './interfaces';
 import { PersonBook } from './types';
+// import  type { Library } from './classes';
+import { Library } from './classes/library';
 
 showHello('greeting', 'TypeScript');
 
@@ -190,3 +192,12 @@ if (flag) {
     const reader = new m.Reader();
     console.log(reader);
 }
+
+// Task 06.06
+let lib: Library = new Library();
+let lib2: Library = {
+    id: 1,
+    address: 'aaa',
+    name:'bbb',
+};
+console.log(lib2);
