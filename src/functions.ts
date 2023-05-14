@@ -171,3 +171,7 @@ export function setDefaultConfig(options: TOptions){
 
     return options;
 }
+
+export function purge<T>(inventory: Array<T>): T[] {
+    return inventory.slice(2);
+}

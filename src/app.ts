@@ -1,6 +1,6 @@
 /* eslint-disable no-redeclare,no-underscore-dangle */
 
-import { ReferenceItem, UL, RefBook } from './classes';
+import { ReferenceItem, UL, RefBook, Shelf } from './classes';
 import {
     bookTitleTransform,
     createCustomer,
@@ -11,10 +11,10 @@ import {
     logBookTitles,
     logFirstAvailable, printBook, setDefaultConfig,
     сheckoutBooks,
-    printRefBook
+    printRefBook, purge
 } from './functions';
 import { Category } from './enums';
-import { Author, Book, Librarian, Logger, TOptions } from './interfaces';
+import { Author, Book, Librarian, Logger, TOptions, Magazine } from './interfaces';
 import { PersonBook } from './types';
 // import  type { Library } from './classes';
 import { Library } from './classes/library';
@@ -201,3 +201,38 @@ let lib2: Library = {
     name:'bbb',
 };
 console.log(lib2);
+
+// Task 07.01
+const inventory: Book[] = [
+    { id: 10, title: 'The C Programming Language', author: 'K & R', available: true, category: Category.Software },
+    { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
+    { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
+    { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
+];
+
+// const arr: Book[] = purge(inventory);
+// // the same as
+// const arr2 = purge(inventory);
+// // the same as
+// const arr3 = purge<Book>(inventory);
+//
+// const arr4 = purge([1,2,3]);
+//
+// const purgeNumbers = purge<number>;
+// purgeNumbers([1,2,3]);
+
+// Task 07.02
+
+const bookShelf = new Shelf<Book>();
+inventory.forEach(book => bookShelf.add(book));
+console.log(bookShelf.getFirst().title);
+
+const magazine: Magazine[] = [
+    { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+    { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
+    { title: 'Five Points', publisher: 'GSU' }
+];
+
+const magazineShelf = new Shelf<Magazine>();
+magazine.forEach(mag => magazineShelf.add(mag));
+console.log(magazineShelf.getFirst().title);
