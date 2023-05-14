@@ -173,3 +173,20 @@ printRefBook(refBook);
 
 const ul = new UL.UniversityLibrarian();
 printRefBook(ul);
+
+// Task 06.05
+const flag = true;
+
+if (flag) {
+    import('./classes')
+        .then(m => {
+            const reader = new m.Reader();
+            console.log(reader);
+        });
+}
+
+if (flag) {
+    const m = await import('./classes');
+    const reader = new m.Reader();
+    console.log(reader);
+}
